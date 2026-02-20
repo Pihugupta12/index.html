@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday ❤️</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
@@ -31,20 +32,17 @@ border-radius:25px;
 background:white;
 color:#ff4d6d;
 font-size:18px;
-margin:15px;
+margin-top:25px;
 cursor:pointer;
 }
 
-.heart{
-position:fixed;
-bottom:0;
-color:white;
-animation:float 8s linear forwards;
+h1{
+font-size:40px;
 }
 
-@keyframes float{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-100vh);opacity:0;}
+p{
+font-size:20px;
+line-height:1.6;
 }
 </style>
 </head>
@@ -52,100 +50,78 @@ animation:float 8s linear forwards;
 <body>
 
 <!-- MUSIC -->
-<audio id="bgMusic" src="music.mp3" loop></audio>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 <!-- PAGE 1 -->
 <div class="page active">
 <h1>🎉 Happy Birthday My Love 🎉</h1>
-<p>You make my world beautiful ❤️</p>
-<button onclick="startMusic(); nextPage()">Click Here ❤️</button>
+<p>Oooo jii... Aeee jii 😘</p>
+<button onclick="nextPage()">Click Here ❤️</button>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page">
-<h1>You Are My Everything 💕</h1>
-<p>Life feels perfect with you 😘</p>
+<h1>You Are Special 💕</h1>
+<p>You are my smile, my peace and my favourite notification ❤️</p>
 <button onclick="nextPage()">Continue 💌</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page">
-<h1>Do You Love Me? 😏</h1>
-<button onclick="yesLove()">Yes 😍</button>
-<button id="noBtn" onmouseover="moveNo()">No 😜</button>
+<h1>Your Birthday Wish 🎂</h1>
+<p>I wish tumhari life happiness, success aur meri love se full ho jaye 💖</p>
+<button onclick="nextPage()">Next Surprise 🎁</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page">
-<h2>Make a Birthday Wish 🎂</h2>
-<p>Click the cake to blow it 💨</p>
-<div onclick="blowCandle()" id="cakeBox" style="cursor:pointer;font-size:100px;">
-🎂🔥
+<h1>Important Question 😏</h1>
+<p>Do you love me?? 💘</p>
+<button onclick="yesLove()">Yes 😍</button>
+<button id="noBtn" onmouseover="moveNo()">No 😜</button>
 </div>
-<p id="wishMsg" style="font-size:22px;"></p>
-<h2>Forever Yours 💕</h2>
-<h1>Aeee Jii ❤️</h1>
+
+<!-- FINAL PAGE -->
+<div class="page">
+<h1>My Promise 💞</h1>
+<p>I promise to stay with you forever and always make you smile ❤️</p>
+<h2>Once Again Happy Birthday Jaan 🎂🎈</h2>
 </div>
 
 <script>
-let currentPage = 0;
-const pages = document.querySelectorAll(".page");
+let musicStarted = false;
 
 function startMusic(){
-  const music = document.getElementById("bgMusic");
-  music.play().catch(e => console.log(e));
+const music = document.getElementById("bgMusic");
+if(!musicStarted){
+music.play().catch(err => console.log(err));
+musicStarted = true;
+}
 }
 
 function nextPage(){
-  pages[currentPage].classList.remove("active");
-  currentPage++;
-  if(currentPage < pages.length){
-    pages[currentPage].classList.add("active");
-  }
+startMusic();
+const pages = document.querySelectorAll(".page");
+const activePage = document.querySelector(".active");
+let index = Array.from(pages).indexOf(activePage);
+activePage.classList.remove("active");
+if(index + 1 < pages.length){
+pages[index+1].classList.add("active");
+}
 }
 
 function yesLove(){
-  alert("I knew it 😘❤️");
-  nextPage();
+alert("I Love You Too Baby 😘❤️");
+nextPage();
 }
 
 function moveNo(){
-  const btn = document.getElementById("noBtn");
-  btn.style.position="absolute";
-  btn.style.left=Math.random()*80+"vw";
-  btn.style.top=Math.random()*80+"vh";
-}
-
-function blowCandle(){
-  document.getElementById("cakeBox").innerHTML="🎂";
-  document.getElementById("wishMsg").innerHTML="Yayyy 🥳 Wish granted! I love you ❤️";
-
-  setTimeout(()=>{
-    document.body.innerHTML=`
-    <div style="position:fixed;top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.9);display:flex;justify-content:center;
-    align-items:center;text-align:center;font-size:30px;padding:20px;">
-    <div>
-    ❤️ I LOVE YOU SO MUCH ❤️<br><br>
-    Happy Birthday My Jii 🎂<br><br>
-    Forever Yours 💕<br>
-    <h1>Aeee Jii 😘</h1>
-    </div>
-    </div>
-    `;
-  },1000);
-}
-
-// Floating hearts
-setInterval(createHeart,500);
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(Math.random()*20+15)+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>{heart.remove();},8000);
+const btn = document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
 }
 </script>
 
